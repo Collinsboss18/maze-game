@@ -52,9 +52,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    const onKeyDown = ({ key }) => {
-      // console.log(key, "KEY");
-    };
+    const onKeyDown = ({ key }) => {};
 
     const onKeyUp = ({ key }) => {
       switch (key) {
