@@ -129,7 +129,7 @@ function App() {
   }, [boardBox, boardBoxW]);
 
   useEffect(() => {
-    if (!gameOver) {
+    if (!gameOver && boardBoxW.length > 0) {
       setSteps(steps + 1);
     }
   }, [boardBoxW]);
