@@ -1,23 +1,8 @@
 const pickSelected = ({ arr, round }) => {
-  let resArr = [];
+  const shuffled = arr.sort(() => 0.5 - Math.random());
+  const selected = Array.from({ length: round }, (_, i) => i + 1);
 
-  let createRes = () => {
-    Array.from({ length: round }, (_, i) => i + 1).map(() => {
-      let randomIndex = arr[Math.floor(Math.random() * arr.length)];
-      if (resArr.includes(randomIndex)) {
-        round++;
-      } else {
-        resArr.push(randomIndex);
-
-        if (resArr.length >= round) {
-          return resArr;
-        }
-      }
-    });
-  };
-
-  createRes();
-  return resArr;
+  return { selected, shuffled };
 };
 
 export default pickSelected;

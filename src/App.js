@@ -13,43 +13,42 @@ function App() {
   const [board, setBoard] = useState({});
   const [boardBox, setBoardBox] = useState([]);
   const [boardBoxW, setBoardBoxW] = useState([]);
+  const [shuffled, setShuffled] = useState([]);
   const [selected, setSelected] = useState([]);
   const [active, setActive] = useState(null);
   const [steps, setSteps] = useState(0);
-  const [selectedB, setSelectedB] = useState(false);
-  const [activeB, setActiveB] = useState(false);
   const [gameOver, setGameOver] = useState(false);
 
   useEffect(() => {
     let width = prompt("Enter board width");
     let height = prompt("Enter board height");
-    let selected = pickSelected({
-      arr: Array.from({ length: height * width }, (_, i) => i + 1),
-      round: Math.floor((Number(width) + Number(height)) / 2),
-    });
-
     // width = Number(width);
     // height = Number(height);
 
     if (
       isNaN(width) === true ||
       isNaN(height) === true ||
-      height > 50 ||
-      width > 50
+      height > 70 ||
+      width > 70
     ) {
       height = 10;
       width = 10;
     }
 
+    const { selected, shuffled } = pickSelected({
+      arr: Array.from({ length: height * width }, (_, i) => i + 1),
+      round: Math.floor((Number(width) + Number(height)) / 2),
+    });
+    const activeBox = pickActive({
+      arr: Array.from({ length: height * width }, (_, i) => i + 1),
+      round: Math.floor((Number(width) + Number(height)) / 2),
+    });
+
+    setSteps(0);
+    setShuffled(shuffled);
     setBoard({ board: height * width, width, height });
     setSelected(selected);
-    setActive(
-      pickActive({
-        arr: Array.from({ length: height * width }, (_, i) => i + 1),
-        round: Math.floor((Number(width) + Number(height)) / 2),
-        selected,
-      })
-    );
+    setActive(activeBox);
   }, []);
 
   useEffect(() => {
@@ -125,7 +124,7 @@ function App() {
       createBoard({ board: board?.board });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [board.board, active, selected, active, selectedB, activeB]);
+  }, [board.board, active, selected, active]);
 
   useEffect(() => {
     setGameOver(isGameOver({ boardBox: boardBoxW }));
@@ -139,11 +138,11 @@ function App() {
 
   const createBoard = ({ board }) => {
     setBoardBox(
-      Array.from({ length: board }, (_, i) => i + 1).map((e, i) => {
+      shuffled.map((e, i) => {
         if (i + 1 === active) {
-          return <Box key={i} idx={i} active={!activeB} />;
-        } else if (selected.includes(i + 1)) {
-          return <Box key={i} idx={i} selected={!selectedB} />;
+          return <Box key={i} idx={i} active={true} />;
+        } else if (selected.includes(shuffled[i])) {
+          return <Box key={i} idx={i} selected={true} />;
         } else {
           return <Box key={i} idx={i} />;
         }

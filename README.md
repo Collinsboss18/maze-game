@@ -1,16 +1,16 @@
 # MAZE GAME
 
-### Setup
+## Setup
 
-> Usage instruction
-
-#### Start Project
+### Usage Instructions
 
 1. Clone project
 2. `cd` clone
 3. `npm install`.
 4. run `npm start`
 
-> *ENJOY*
+> *Note: Ensure Internet Connection*
+
+*ENJOY*
  
 by abadaikecollins@gmail.com

@@ -1,26 +1,15 @@
-const pickActive = ({ arr, selected, round }) => {
+const pickActive = ({ arr, round }) => {
   let middle;
-  let arrCon = [...arr];
 
   function isEven(n) {
-    return n % 2 == 0;
+    return n % 2 === 0;
   }
 
-  function getMiddle() {
-    if (isEven(round)) {
-      arrCon.push(arrCon.length + 1);
-      middle = arrCon.splice(Math.floor((arrCon.length - 1) / 2), 1)[0] + Math.floor(round/2);
-      if (selected.includes(middle)) {
-        getMiddle();
-      }
-    } else {
-      middle = arrCon.splice(Math.floor((arrCon.length - 1) / 2), 1)[0];
-      if (selected.includes(middle)) {
-        getMiddle();
-      }
-    }
+  if (isEven(arr.length)) {
+    middle = arr[Math.round((arr.length - 1) / 2)] - Math.floor(round / 2);
+  } else {
+    middle = arr[Math.round((arr.length - 1) / 2)];
   }
-  getMiddle();
   return middle;
 };
 
