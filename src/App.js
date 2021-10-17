@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
 import "./App.css";
+import React, { useEffect, useState } from "react";
 import right from "./utils/moves/right";
 import Box from "./components/Box";
 import pickActive from "./utils/pickActive";
@@ -7,6 +7,7 @@ import pickSelected from "./utils/pickSelected";
 import left from "./utils/moves/left";
 import up from "./utils/moves/up";
 import down from "./utils/moves/down";
+import isGameOver from "./utils/isGameOver";
 
 function App() {
   const [board, setBoard] = useState({});
@@ -14,8 +15,10 @@ function App() {
   const [boardBoxW, setBoardBoxW] = useState([]);
   const [selected, setSelected] = useState([]);
   const [active, setActive] = useState(null);
+  const [steps, setSteps] = useState(0);
   const [selectedB, setSelectedB] = useState(false);
   const [activeB, setActiveB] = useState(false);
+  const [gameOver, setGameOver] = useState(false);
 
   useEffect(() => {
     let width = prompt("Enter board width");
@@ -24,6 +27,9 @@ function App() {
       arr: Array.from({ length: height * width }, (_, i) => i + 1),
       round: Math.floor((Number(width) + Number(height)) / 2),
     });
+
+    // width = Number(width);
+    // height = Number(height);
 
     if (
       isNaN(width) === true ||
@@ -54,7 +60,6 @@ function App() {
     const onKeyUp = ({ key }) => {
       switch (key) {
         case "ArrowUp":
-          console.log("ArrowUp", active, board.width);
           let { uData, uUpdated } = up({
             current: active - 1,
             boardBox: boardBoxW.length > 0 ? boardBoxW : boardBox,
@@ -67,7 +72,6 @@ function App() {
           }
           break;
         case "ArrowDown":
-          console.log("ArrowDown");
           let { dData, dUpdated } = down({
             current: active - 1,
             boardBox: boardBoxW.length > 0 ? boardBoxW : boardBox,
@@ -80,7 +84,6 @@ function App() {
           }
           break;
         case "ArrowRight":
-          console.log("ArrowRight");
           let { rData, rUpdated } = right({
             current: active - 1,
             boardBox: boardBoxW.length > 0 ? boardBoxW : boardBox,
@@ -92,7 +95,6 @@ function App() {
           }
           break;
         case "ArrowLeft":
-          console.log("ArrowLeft");
           let { lData, lUpdated } = left({
             current: active - 1,
             boardBox: boardBoxW.length > 0 ? boardBoxW : boardBox,
@@ -122,7 +124,18 @@ function App() {
     if (selected.length > 0 && active !== null && board.board !== undefined) {
       createBoard({ board: board?.board });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [board.board, active, selected, active, selectedB, activeB]);
+
+  useEffect(() => {
+    setGameOver(isGameOver({ boardBox: boardBoxW }));
+  }, [boardBox, boardBoxW]);
+
+  useEffect(() => {
+    if (!gameOver) {
+      setSteps(steps + 1);
+    }
+  }, [boardBoxW]);
 
   const createBoard = ({ board }) => {
     setBoardBox(
@@ -150,13 +163,22 @@ function App() {
       <div className="flex flex-col justify-center container mx-auto">
         <div
           style={{ width: `${40 * board?.width}px` }}
-          className={"mx-auto h-max mb-20"}
+          className={"mx-auto h-max mb-10"}
         >
           <div className={`grid grid-cols-${board?.width} 5mb-2`}>
             {boardBoxW.length > 0
               ? boardBoxW.map((e, i) => e)
               : boardBox.map((e, i) => e)}
           </div>
+        </div>
+        <div className={"text-center text-xl font-mono mb-10"}>
+          <h3>Steps Taken: {steps}</h3>
+          {gameOver && (
+            <div>
+              <h1 className={"text-3xl text-yellow-500"}>Congratulation</h1>
+              <p className={"text-lg text-green-500"}>Game Over</p>
+            </div>
+          )}
         </div>
       </div>
     </div>

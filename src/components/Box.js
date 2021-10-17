@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React from "react";
 
 const Box = (props) => {
   const check = () => {
@@ -11,10 +11,10 @@ const Box = (props) => {
 
   return (
     <div
+      {...props}
       id={props.idx}
       style={{ width: "40px", border: ".5px solid #b9b9b9" }}
       className={`bg-gray-50 h-10 p-1`}
-      {...props}
     >
       {check()}
     </div>

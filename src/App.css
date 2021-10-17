@@ -2,7 +2,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans");
 
 .box {
-  border: solid rgba(95, 95, 95, 0.453) .5px;
+  border: solid rgba(95, 95, 95, 0.453) 0.5px;
   display: block;
   float: left;
 }
@@ -157,4 +157,84 @@
 
 .grid-cols-50 {
   grid-template-columns: repeat(50, minmax(0, 1fr));
+}
+
+.grid-cols-51 {
+  grid-template-columns: repeat(51, minmax(0, 1fr));
+}
+
+.grid-cols-52 {
+  grid-template-columns: repeat(52, minmax(0, 1fr));
+}
+
+.grid-cols-53 {
+  grid-template-columns: repeat(53, minmax(0, 1fr));
+}
+
+.grid-cols-54 {
+  grid-template-columns: repeat(54, minmax(0, 1fr));
+}
+
+.grid-cols-55 {
+  grid-template-columns: repeat(55, minmax(0, 1fr));
+}
+
+.grid-cols-56 {
+  grid-template-columns: repeat(56, minmax(0, 1fr));
+}
+
+.grid-cols-57 {
+  grid-template-columns: repeat(57, minmax(0, 1fr));
+}
+
+.grid-cols-58 {
+  grid-template-columns: repeat(58, minmax(0, 1fr));
+}
+
+.grid-cols-59 {
+  grid-template-columns: repeat(59, minmax(0, 1fr));
+}
+
+.grid-cols-60 {
+  grid-template-columns: repeat(60, minmax(0, 1fr));
+}
+
+.grid-cols-61 {
+  grid-template-columns: repeat(61, minmax(0, 1fr));
+}
+
+.grid-cols-62 {
+  grid-template-columns: repeat(62, minmax(0, 1fr));
+}
+
+.grid-cols-63 {
+  grid-template-columns: repeat(63, minmax(0, 1fr));
+}
+
+.grid-cols-64 {
+  grid-template-columns: repeat(64, minmax(0, 1fr));
+}
+
+.grid-cols-65 {
+  grid-template-columns: repeat(65, minmax(0, 1fr));
+}
+
+.grid-cols-66 {
+  grid-template-columns: repeat(66, minmax(0, 1fr));
+}
+
+.grid-cols-67 {
+  grid-template-columns: repeat(67, minmax(0, 1fr));
+}
+
+.grid-cols-68 {
+  grid-template-columns: repeat(68, minmax(0, 1fr));
+}
+
+.grid-cols-69 {
+  grid-template-columns: repeat(69, minmax(0, 1fr));
+}
+
+.grid-cols-70 {
+  grid-template-columns: repeat(70, minmax(0, 1fr));
 }
